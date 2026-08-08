@@ -1,7 +1,5 @@
 {
-  "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/login", "destination": "/login.html" }
+    { "source": "/(.*)", "destination": "/api/index.py" }
   ]
 }
