@@ -2,6 +2,10 @@
   "version": 2,
   "name": "double-entry-accounting-system",
   "cleanUrls": true,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "login.html", "use": "@vercel/static" }
+  ],
   "routes": [
     { "src": "/", "dest": "/index.html" },
     { "src": "/login", "dest": "/login.html" }
