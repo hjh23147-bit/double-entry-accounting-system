@@ -1,5 +1,4 @@
 import logging
-from http.server import BaseHTTPRequestHandler
 
 from models import DatabaseManager
 from controllers import AuthController, AccountingController, InventoryAI
@@ -26,28 +25,27 @@ def main():
     app_gui = AccountingAppGUI(root, auth_controller, accounting_controller, inventory_ai)
     root.mainloop()
 
-# Vercel Serverless Handler (Top-level app/handler required for Vercel Python Runtime)
-class VercelHandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'text/html; charset=utf-8')
-        self.end_headers()
-        
-        try:
-            db_manager = DatabaseManager(db_path=":memory:")
-            acc_ctrl = AccountingController(db_manager)
-            tb = acc_ctrl.get_trial_balance()
-            acc_count = len(tb)
-            status_text = f"تم الاتصال بقاعدة البيانات المحاسبية واختبار شجرة الحسابات بنجاح ({acc_count} حساب مقيد)"
-        except Exception as e:
-            status_text = f"حالة القاعدة المحاسبية: {e}"
+# Vercel WSGI Serverless Application Entrypoint
+def app(environ, start_response):
+    status = '200 OK'
+    headers = [('Content-type', 'text/html; charset=utf-8')]
+    start_response(status, headers)
 
-        html_out = f"""<!DOCTYPE html>
+    try:
+        db_manager = DatabaseManager(db_path=":memory:")
+        acc_ctrl = AccountingController(db_manager)
+        tb = acc_ctrl.get_trial_balance()
+        acc_count = len(tb)
+        status_text = f"تم الاتصال بقاعدة البيانات المحاسبية واختبار شجرة الحسابات بنجاح ({acc_count} حساب مقيد)"
+    except Exception as e:
+        status_text = f"حالة القاعدة المحاسبية: {e}"
+
+    html_out = f"""<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام المحاسبة المالي المزدوج - Vercel Engine</title>
+    <title>نظام المحاسبة المالي المزدوج - Vercel WSAM5</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style> body {{ font-family: 'Cairo', sans-serif; }} </style>
@@ -81,10 +79,9 @@ class VercelHandler(BaseHTTPRequestHandler):
     </div>
 </body>
 </html>"""
-        self.wfile.write(html_out.encode('utf-8'))
+    return [html_out.encode('utf-8')]
 
-app = VercelHandler
-handler = VercelHandler
+handler = app
 
 if __name__ == "__main__":
     main()
