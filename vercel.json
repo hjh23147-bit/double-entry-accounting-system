@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "name": "double-entry-accounting-system",
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/login", "dest": "/login.html" }
+  ]
+}
