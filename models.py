@@ -9,7 +9,11 @@ logging.basicConfig(filename="accounting_app.log", level=logging.INFO,
 
 class DatabaseManager:
     def __init__(self, db_path="accounting.db"):
-        self.db_path = db_path
+        import os
+        if os.environ.get("VERCEL"):
+            self.db_path = ":memory:"
+        else:
+            self.db_path = db_path
         self.conn = None
         self.cursor = None
         self.connect()

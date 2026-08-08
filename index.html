@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام المحاسبة المالي المزدوج - البوابة الرئيسية</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { cairo: ['Cairo', 'sans-serif'] },
+                    colors: {
+                        royalNavy: { 800: '#0f1c3f', 900: '#0a1128', 950: '#060a17' },
+                        royalGold: { 400: '#facc15', 500: '#eab308', 600: '#ca8a04' }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+        .glass-card-royal {
+            background: rgba(10, 17, 40, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(234, 179, 8, 0.35);
+            box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.9), 0 0 35px rgba(234, 179, 8, 0.15);
+        }
+    </style>
+</head>
+<body class="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-royalNavy-950 via-royalNavy-900 to-royalNavy-800 text-white">
+
+    <div class="fixed top-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-amber-500/20 via-yellow-600/15 to-transparent blur-3xl pointer-events-none animate-pulse"></div>
+
+    <main class="w-full max-w-md relative z-10 text-center">
+        <div class="glass-card-royal rounded-3xl p-8 sm:p-10 space-y-6">
+            <div class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-amber-500/20 via-yellow-500/30 to-amber-600/20 border border-royalGold-400/40 flex items-center justify-center shadow-[0_0_20px_rgba(234,179,8,0.25)]">
+                <i class="fa-solid fa-scale-balanced text-4xl text-royalGold-400"></i>
+            </div>
+            
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-black text-white mb-2">نظام المحاسبة المالي المزدوج</h1>
+                <p class="text-sm text-amber-300 font-semibold">المحرك المحاسبي المزدوج والمميزات الذكية</p>
+            </div>
+
+            <div class="space-y-3">
+                <a href="login.html" class="inline-flex items-center justify-center w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-royalNavy-950 font-black text-base shadow-lg hover:shadow-yellow-500/50 transition-all duration-300 gap-2">
+                    <span>تسجيل الدخول للنظام الملكي</span>
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </a>
+                
+                <a href="/api" class="inline-flex items-center justify-center w-full py-3 px-6 rounded-2xl bg-slate-800 border border-amber-500/40 text-amber-400 font-bold text-sm hover:bg-slate-700 transition-all duration-300 gap-2">
+                    <i class="fa-solid fa-server text-xs"></i>
+                    <span>استعراض حالة محرك Python السحابي</span>
+                </a>
+            </div>
+        </div>
+        
+        <p class="text-xs text-amber-400/70 mt-6">&copy; 2026 جميع الحقوق محفوظة - وسام Sys للنظم المحاسبية المزدوجة</p>
+    </main>
+
+</body>
+</html>
