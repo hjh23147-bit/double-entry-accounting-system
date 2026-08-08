@@ -1,12 +1,14 @@
 import logging
+import tkinter as tk
+import ttkbootstrap as ttk
 
 from models import DatabaseManager
 from controllers import AuthController, AccountingController, InventoryAI
+from views import AccountingAppGUI
 
 def main():
-    import tkinter as tk
-    from views import AccountingAppGUI
-
+    logging.basicConfig(filename="accounting_app.log", level=logging.INFO,
+                        format='%(asctime)s - %(levelname)s - %(message)s')
     logging.info("بدء تشغيل النظام المحاسبي المزدوج (MVC Accounting System)")
     
     # 1. تهيئة قاعدة البيانات والهيكل القياسي
@@ -17,17 +19,10 @@ def main():
     accounting_controller = AccountingController(db_manager)
     inventory_ai = InventoryAI(db_manager)
 
-    # 3. تشغيل الواجهة الرسومية
+    # 3. تشغيل الواجهة الرسومية لسطح المكتب (Desktop Tkinter App)
     root = tk.Tk()
-    app_gui = AccountingAppGUI(root, auth_controller, accounting_controller, inventory_ai)
+    app = AccountingAppGUI(root, auth_controller, accounting_controller, inventory_ai)
     root.mainloop()
-
-# Vercel Web Entrypoint (Top-level app export required by Vercel Python runtime)
-try:
-    from api.index import handler
-    app = handler
-except Exception:
-    pass
 
 if __name__ == "__main__":
     main()
